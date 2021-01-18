@@ -1,0 +1,28 @@
+{{- if .Values.alertmanager.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "infoworks.fullname" . }}-governor
+  namespace: {{ template "infoworks.namespace" . }}
+  labels:
+    app: {{ template "infoworks.fullname" . }}-governor
+spec:
+  replicas: {{ .Values.infoworks-ui.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "infoworks.fullname" . }}-governor
+  template:
+    metadata:
+      labels:
+        app: {{ template "infoworks.fullname" . }}-governor
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.infoworks-governor.image }}
+          image: {{ .Values.infoworks-governor.image.repository }}:{{ .Values.infoworks-governor.image.tag }}
+          version: {{ .Values.infoworks-governor.image.tag }}
+          {{- end }}
+          ports:
+            - containerPort: 3002
+              name: http

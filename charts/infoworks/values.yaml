@@ -1,0 +1,60 @@
+# Default values for Infoworks.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+nameOverride: ""
+fullnameOverride: ""
+namespaceOverride: ""
+
+
+ingress:
+  enabled: false
+  hosts:
+    - k8spoc.infoworks.cloud
+  paths:
+
+iwhome: /opt/infoworks
+
+labels:
+  app: infoworks
+
+infoworks-ui:
+  enabled: true
+  replicas: 1
+  image:
+    repository: infoworksdata/infoworks-ui
+    tag: v3
+  service:
+    type: ClusterIP
+    port: 3000
+
+
+infoworks-governor:
+  enabled: true
+  image:
+    repository: infoworksdata/infoworks-governor
+    tag: v3
+  service:
+    type: ClusterIP
+    port: 3002
+
+infoworks-hangman:
+  enabled: true
+
+infoworks-rabbitmq:
+  enabled: true
+
+infoworks-postgres:
+  enabled: true
+
+infoworks-configserver:
+  enabled: true
+
+infoworks-dt:
+  enabled: true
+
+infoworks-ingestion:
+  enabled: true
+
+infoworks-mongodb:
+  enabled: true

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "infoworks.fullname" . }}-governor
+  namespace: {{ template "infoworks.namespace" . }}
+  labels:
+    app: {{ template "infoworks.fullname" . }}-governor
+spec:
+  type: {{ .Values.infoworks-governor.service.type }}
+  ports:
+    - port: {{ .Values.infoworks-governor.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ template "infoworks.fullname" . }}-governor

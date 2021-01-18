@@ -1,0 +1,45 @@
+{{- if .Values.alertmanager.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "infoworks.fullname" . }}-ui
+  namespace: {{ template "infoworks.namespace" . }}
+  labels:
+    app: {{ template "infoworks.fullname" . }}-ui
+spec:
+  replicas: {{ .Values.infoworks-ui.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "infoworks.fullname" . }}-ui
+  template:
+    metadata:
+      labels:
+        app: {{ template "infoworks.fullname" . }}-ui
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.infoworks-ui.image }}
+          image: {{ .Values.infoworks-ui.image.repository }}:{{ .Values.infoworks-ui.image.tag }}
+          version: {{ .Values.infoworks-ui.image.tag }}
+          {{- end }}
+          ports:
+            - containerPort: 3000
+              name: http
+          env:
+          - name: ROOT_URL
+            value: http://localhost
+          - name: PORT
+            value: '3000'
+          - name: IW_HOME
+            value: {{ .Values.iwhome }}
+          - name: MONGO_URL
+            valueFrom:
+              secretKeyRef:
+                key: mongo_url
+                name: mongo-url
+          - name: METEOR_SETTINGS
+            valueFrom:
+              secretKeyRef:
+                key: settings.json
+                name: meteor-settings
