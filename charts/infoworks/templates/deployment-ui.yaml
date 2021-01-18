@@ -7,7 +7,7 @@ metadata:
   labels:
     app: {{ template "infoworks.fullname" . }}-ui
 spec:
-  replicas: {{ .Values.infoworks-ui.replicas }}
+  replicas: {{ .Values.infoworksui.replicas }}
   selector:
     matchLabels:
       app: {{ template "infoworks.fullname" . }}-ui
@@ -19,9 +19,9 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.infoworks-ui.image }}
-          image: {{ .Values.infoworks-ui.image.repository }}:{{ .Values.infoworks-ui.image.tag }}
-          version: {{ .Values.infoworks-ui.image.tag }}
+          {{- if .Values.infoworksui.image }}
+          image: {{ .Values.infoworksui.image.repository }}:{{ .Values.infoworksui.image.tag }}
+          version: {{ .Values.infoworksui.image.tag }}
           {{- end }}
           ports:
             - containerPort: 3000

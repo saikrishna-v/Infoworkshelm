@@ -18,7 +18,7 @@ iwhome: /opt/infoworks
 labels:
   app: infoworks
 
-infoworks-ui:
+infoworksui:
   enabled: true
   replicas: 1
   image:
@@ -29,7 +29,7 @@ infoworks-ui:
     port: 3000
 
 
-infoworks-governor:
+infoworksgovernor:
   enabled: true
   image:
     repository: infoworksdata/infoworks-governor

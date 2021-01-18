@@ -19,9 +19,9 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.infoworks-governor.image }}
-          image: {{ .Values.infoworks-governor.image.repository }}:{{ .Values.infoworks-governor.image.tag }}
-          version: {{ .Values.infoworks-governor.image.tag }}
+          {{- if .Values.infoworksgovernor.image }}
+          image: {{ .Values.infoworksgovernor.image.repository }}:{{ .Values.infoworksgovernor.image.tag }}
+          version: {{ .Values.infoworksgovernor.image.tag }}
           {{- end }}
           ports:
             - containerPort: 3002

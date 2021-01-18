@@ -6,9 +6,9 @@ metadata:
   labels:
     app: {{ template "infoworks.fullname" . }}-ui
 spec:
-  type: {{ .Values.infoworks-ui.service.type }}
+  type: {{ .Values.infoworksui.service.type }}
   ports:
-    - port: {{ .Values.infoworks-ui.service.port }}
+    - port: {{ .Values.infoworksui.service.port }}
       targetPort: http
       protocol: TCP
       name: http
